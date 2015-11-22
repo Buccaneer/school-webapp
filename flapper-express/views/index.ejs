@@ -4,6 +4,7 @@
   <title>Flapper News</title>
   <script src="/javaScripts/angular.min.js"></script>
   <script src="/javaScripts/angular-ui-router.js"></script>
+  <script src="/javaScripts/angular-animate.min.js"></script>
   <script src="/javaScripts/angularApp.js"></script>
   <link rel="stylesheet" href="/javaScripts/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
 </head>
@@ -17,6 +18,10 @@
       <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
     </ul>
   </nav>
+  <div ng-controller="SliderController">
+    <h1>Slider Using AngularJS</h1>
+    <slider images="images" />
+  </div>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div ui-view></div>
@@ -36,7 +41,7 @@
         <span ng-show="post.author">
           posted by <a>{{post.author}}</a>
         </span>
-         | votes: {{post.upvotes}}
+        | votes: {{post.upvotes}}
         <span> <a href="#/posts/{{post._id}}">Comments</a></span>
       </p>
     </div>
