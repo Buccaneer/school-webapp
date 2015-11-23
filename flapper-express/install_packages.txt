@@ -1,0 +1,5 @@
+npm install --g gulp
+npm install --save-dev gulp-load-plugins
+npm install --save-dev gulp-mocha
+
+npm install --save-dev chai
