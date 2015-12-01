@@ -1,4 +1,4 @@
-angular.module('flapperNews').factory('auth', ['$http', '$window', function($http, $window) {
+angular.module('flapperNews.authentication').factory('auth', ['$http', '$window', function($http, $window) {
   var auth = {};
 
   auth.saveToken = function(token) {

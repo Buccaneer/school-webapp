@@ -9,6 +9,8 @@ var passport = require('passport');
 
 //require models
 require('./models');
+
+//require passport
 require('./config/passport');
 
 //init database
@@ -21,7 +23,7 @@ var app = express();
 app.use(passport.initialize());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../client'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -32,7 +34,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'src/client')));
 
 app.use('/', routes);
 app.use('/users', users);

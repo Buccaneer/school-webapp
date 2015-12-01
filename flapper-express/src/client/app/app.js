@@ -1,9 +1,10 @@
-angular.module('flapperNews.controllers', []);
-angular.module('flapperNews.directives', []);
+angular.module('flapperNews.authentication', []);
+angular.module('flapperNews.slider', []);
+angular.module('flapperNews.posts', []);
 var app = angular.module('flapperNews',
 ['ui.router',
  'ngAnimate',
- 'flapperNews.controllers',
+ 'flapperNews.authentication',
  'flapperNews.directives'
 ]);
 

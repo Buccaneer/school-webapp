@@ -23,6 +23,6 @@ angular.module('flapperNews.directives').directive('slider', function($timeout) 
         scope.images[scope.currentIndex].visible = true; // make the current image visible
       });
     },
-    templateUrl: '../../templates/templateurl.html'
+    templateUrl: 'slider.template.html'
   };
 });

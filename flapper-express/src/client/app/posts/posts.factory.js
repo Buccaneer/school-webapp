@@ -1,4 +1,4 @@
-angular.module('flapperNews').factory('posts', ['$http', 'auth', function($http, auth) {
+angular.module('flapperNews.posts').factory('posts', ['$http', 'auth', function($http, auth) {
   var postFactory = {
     posts: []
   };
