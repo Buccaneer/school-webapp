@@ -5,7 +5,8 @@ var app = angular.module('flapperNews',
 ['ui.router',
  'ngAnimate',
  'flapperNews.authentication',
- 'flapperNews.directives'
+ 'flapperNews.slider',
+ 'flapperNews.posts'
 ]);
 
 app.config([

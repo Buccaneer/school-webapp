@@ -6,68 +6,63 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var port = process.env.PORT || 8000;
 
-//require models
+var environment = process.env.NODE_ENV;
+
+// require models
 require('./models');
 
-//require passport
+// require passport config
 require('./config/passport');
 
-//init database
+// init database
 mongoose.connect('mongodb://localhost/news');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
-app.use(passport.initialize());
 
 // view engine setup
-app.set('views', path.join(__dirname, '../client'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'src/client')));
+app.use(passport.initialize());
 
-app.use('/', routes);
-app.use('/users', users);
+var routes = require('./routes/index')(app);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+console.log('About to crank up node');
+console.log('PORT=' + port);
+console.log('NODE_ENV=' + environment);
+
+app.get('/ping', function (req, res, next) {
+    console.log(req.body);
+    res.send('pong');
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+switch (environment) {
+    case 'build':
+        console.log('** BUILD **');
+        app.set('views', path.join(__dirname, '../../build'));
+        app.use(express.static('./build'));
+        app.use('/*', express.static('./build/index.ejs'));
+        break;
+    default:
+        console.log('** DEV **');
+        app.set('views', path.join(__dirname, '../client'));
+        app.use(express.static('./src/client/'));
+        app.use(express.static('./'));
+        //app.use(express.static('./tmp'));
+        app.use('/*', express.static('./src/client/index.ejs'));
+        break;
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.listen(port, function () {
+    console.log('Express server listening on port ' + port);
+    console.log('env = ' + app.get('env') +
+        '\n__dirname = ' + __dirname +
+        '\nprocess.cwd = ' + process.cwd());
 });
 
 module.exports = app;

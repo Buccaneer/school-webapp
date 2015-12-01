@@ -1,4 +1,4 @@
-angular.module('flapperNews.directives').directive('slider', function($timeout) {
+angular.module('flapperNews.slider').directive('slider', function($timeout) {
   return {
     restrict: 'AE',
     replace: true,
@@ -23,6 +23,6 @@ angular.module('flapperNews.directives').directive('slider', function($timeout) 
         scope.images[scope.currentIndex].visible = true; // make the current image visible
       });
     },
-    templateUrl: 'slider.template.html'
+    templateUrl: 'app/slider/slider.template.html'
   };
 });

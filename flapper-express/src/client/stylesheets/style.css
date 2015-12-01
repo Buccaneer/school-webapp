@@ -7,7 +7,7 @@ a {
   color: #00B7FF;
 }
 
-.slide.ng-hide-add,
+/*.slide.ng-hide-add,
 .slide.ng-hide-remove {
   -webkit-transition: all linear 0.5s;
   -moz-transition: all linear 0.5s;
@@ -22,4 +22,4 @@ a {
 .slide.ng-hide-add,
 .slide.ng-hide-remove.ng-hide-remove-active {
   opacity: 1;
-}
+}*/

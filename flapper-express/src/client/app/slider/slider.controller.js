@@ -1,4 +1,4 @@
-angular.module('flapperNews.controllers').controller('SliderController', function($scope) {
+angular.module('flapperNews.slider').controller('SliderController', function($scope) {
   $scope.images = [{
     src: 'img1.png',
     title: 'Pic 1'
