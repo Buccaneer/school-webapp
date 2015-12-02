@@ -22,7 +22,12 @@
   <link rel="stylesheet" href="/src/client/stylesheets/style.css" /-->
 
   <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
   <!-- endbower -->
+
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/.tmp/styles.css">
+  <!-- endinject -->
 
 </head>
 
@@ -46,9 +51,26 @@
   </div>
 
   <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <!-- endbower -->
 
   <!-- inject:js -->
+  <script src="/src/client/app/app.js"></script>
+  <script src="/src/client/app/home/home.config.js"></script>
+  <script src="/src/client/app/home/home.controller.js"></script>
+  <script src="/src/client/app/authentication/auth.config.js"></script>
+  <script src="/src/client/app/authentication/auth.controller.js"></script>
+  <script src="/src/client/app/authentication/auth.factory.js"></script>
+  <script src="/src/client/app/layout/nav.controller.js"></script>
+  <script src="/src/client/app/posts/posts.config.js"></script>
+  <script src="/src/client/app/posts/posts.controller.js"></script>
+  <script src="/src/client/app/posts/posts.factory.js"></script>
+  <script src="/src/client/app/slider/slider.config.js"></script>
+  <script src="/src/client/app/slider/slider.controller.js"></script>
+  <script src="/src/client/app/slider/slider.directive.js"></script>
   <!-- endinject -->
 </body>
 
