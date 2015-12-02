@@ -20,6 +20,10 @@
   <script src="/src/client/app/slider/slider.directive.js"></script>
   <link rel="stylesheet" href="/src/client/vendors/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/src/client/stylesheets/style.css" />
+
+  <!-- bower:css -->
+  <!-- endbower -->
+
 </head>
 
 <body ng-app="flapperNews" ng-controller="HomeCtrl" class="container-fluid">
@@ -31,15 +35,16 @@
       <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
     </ul>
   </nav>
-  <div ng-controller="SliderController">
-    <h1>Slider Using AngularJS</h1>
-    <slider images="images" />
-  </div>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+      <div ng-controller="SliderController">
+        <h1>Slider Using AngularJS</h1>
+        <slider images="images" />
+      </div>
       <div ui-view></div>
     </div>
   </div>
+
 </body>
 
 </html>

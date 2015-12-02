@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var app = require('../app');
+var app = require('../src/server/app');
 var request = require('supertest');
 var agent = request.agent(app);
 
@@ -16,7 +16,7 @@ describe('GET /posts', function() {
       var post = fetchedData[0];
 
       if (post) {
-        expect(post).to.have.all.keys('__v', '_id', 'comments', 'upvotes');
+        expect(post).to.have.all.keys('__v', '_id', 'author', 'comments', 'link', 'title', 'upvotes');
         expect(post.comments).to.be.an('array');
         expect(post.upvotes).to.be.a('number');
         done();
