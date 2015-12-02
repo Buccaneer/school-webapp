@@ -1,4 +1,4 @@
-angular.module('flapperNews').controller('MainCtrl', [
+angular.module('flapperNews.home').controller('HomeCtrl', [
   '$scope',
   'posts',
   'auth',
@@ -18,11 +18,11 @@ angular.module('flapperNews').controller('MainCtrl', [
 
     $scope.incrementUpvotes = function(post) {
       posts.upvote(post);
-    }
+    };
 
     $scope.decrementUpvotes = function(post) {
       posts.downvote(post);
-    }
+    };
 
   }
 ]);

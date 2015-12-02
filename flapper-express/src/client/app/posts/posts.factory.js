@@ -43,7 +43,7 @@ angular.module('flapperNews.posts').factory('posts', ['$http', 'auth', function(
     return $http.get('/posts/' + id).then(function(res) {
       return res.data;
     });
-  }
+  };
 
   postFactory.addComment = function(id, comment) {
     return $http.post('/posts/' + id + '/comments', comment, {

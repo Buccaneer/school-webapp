@@ -7,7 +7,7 @@ angular.module('flapperNews.authentication').factory('auth', ['$http', '$window'
 
   auth.getToken = function() {
     return $window.localStorage['flapper-news-token'];
-  }
+  };
 
   auth.isLoggedIn = function() {
     var token = auth.getToken();

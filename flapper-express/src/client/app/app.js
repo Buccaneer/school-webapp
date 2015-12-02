@@ -1,12 +1,13 @@
 angular.module('flapperNews.authentication', []);
-angular.module('flapperNews.slider', []);
+angular.module('flapperNews.slider', ['ngAnimate']);
 angular.module('flapperNews.posts', []);
+angular.module('flapperNews.home', []);
 var app = angular.module('flapperNews',
 ['ui.router',
- 'ngAnimate',
  'flapperNews.authentication',
  'flapperNews.slider',
- 'flapperNews.posts'
+ 'flapperNews.posts',
+ 'flapperNews.home'
 ]);
 
 app.config([
@@ -16,8 +17,8 @@ app.config([
     $stateProvider.state(
         'home', {
           url: '/home',
-          templateUrl: '/home.html',
-          controller: 'MainCtrl',
+          templateUrl: 'app/home/home.template.html',
+          controller: 'HomeCtrl',
           resolve: {
             postPromise: ['posts', function(postFactory) {
               return postFactory.getAll();
@@ -27,7 +28,7 @@ app.config([
       .state(
         'posts', {
           url: '/posts/{id}',
-          templateUrl: '/posts.html',
+          templateUrl: 'app/posts/posts.template.html',
           controller: 'PostsCtrl',
           resolve: {
             post: ['$stateParams', 'posts', function($stateParams, posts) {
@@ -38,7 +39,7 @@ app.config([
       )
       .state('login', {
         url: '/login',
-        templateUrl: '/login.html',
+        templateUrl: 'app/authentication/auth.login.html',
         controller: 'AuthCtrl',
         onEnter: ['$state', 'auth', function($state, auth) {
           if (auth.isLoggedIn()) {
@@ -48,7 +49,7 @@ app.config([
       })
       .state('register', {
         url: '/register',
-        templateUrl: '/register.html',
+        templateUrl: 'app/authentication/auth.register.html',
         controller: 'AuthCtrl',
         onEnter: ['$state', 'auth', function($state, auth) {
           if (auth.isLoggedIn()) {

@@ -21,4 +21,4 @@ angular.module('flapperNews.authentication').controller('AuthCtrl', [
       });
     };
   }
-])
+]);

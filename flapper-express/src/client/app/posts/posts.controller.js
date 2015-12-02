@@ -20,11 +20,11 @@ angular.module('flapperNews.posts').controller('PostsCtrl', [
 
     $scope.incrementCommentUpvotes = function(comment) {
       posts.upvoteComment(post, comment);
-    }
+    };
 
     $scope.decrementCommentUpvotes = function(comment) {
       posts.downvoteComment(post, comment);
-    }
+    };
 
   }
 ]);
