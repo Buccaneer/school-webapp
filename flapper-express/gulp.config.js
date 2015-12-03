@@ -19,6 +19,7 @@ module.exports = function() {
     index: client + 'index.ejs',
     sass: client + 'stylesheets/*.scss',
     images: client + 'img/**/*.*',
+    htmltemplates: client + 'app/**/*.html',
 
     /**
      *  Build directories
@@ -40,6 +41,18 @@ module.exports = function() {
     defaultPort: 3000,
     nodeServer: server + 'app.js',
     server: server,
+
+    /**
+     *  Template cache
+     */
+    templateCache: {
+      file: 'templates.js',
+      options: {
+        module: 'app.core',
+        standAlone: false,
+        root: 'app/'
+      }
+    },
 
     /**
      *  Browser sync

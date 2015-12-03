@@ -79,6 +79,30 @@ gulp.task('clean-images', function() {
   clean(config.build + 'images/**/*.*');
 });
 
+gulp.task('clean-code', function() {
+  var files = [].concat(
+    config.temp + '**/*.js',
+    config.build + '**/*.html',
+    config.build + 'js/**/*.js'
+  );
+  clean(files);
+});
+
+gulp.task('templatecache', ['clean-code'], function() {
+  log('Creating AngularJS $templateCache');
+
+  return gulp.src(config.htmltemplates)
+    //It appears minifying is now done by default by templateCache?
+    /*.pipe($.minifyHtml({
+      empty: true
+    }))*/
+    .pipe($.angularTemplatecache(
+      config.templateCache.file,
+      config.templateCache.options
+    ))
+    .pipe(gulp.dest(config.temp));
+});
+
 gulp.task('wiredep', function() {
   log('Wiring up the bower css, js and own js into html');
   var options = config.getWiredepDefaultOptions();
