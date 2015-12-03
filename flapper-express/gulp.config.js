@@ -1,6 +1,7 @@
 module.exports = function() {
   var client = './src/client/';
   var server = './src/server/';
+  var build = './build/';
   var temp = './.tmp/';
   var config = {
     /**
@@ -17,6 +18,12 @@ module.exports = function() {
     clientjs: [client + '**/*.js', client + '**/*.module.js'],
     index: client + 'index.ejs',
     sass: client + 'stylesheets/*.scss',
+    images: client + 'img/**/*.*',
+
+    /**
+     *  Build directories
+     */
+    build: build,
 
     /**
      *  Bower and NPM directories
@@ -32,7 +39,12 @@ module.exports = function() {
      */
     defaultPort: 3000,
     nodeServer: server + 'app.js',
-    server: server
+    server: server,
+
+    /**
+     *  Browser sync
+     */
+    browserReloadDelay: 1000
   };
 
   config.getWiredepDefaultOptions = function() {

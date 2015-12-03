@@ -8,12 +8,9 @@ var $ = require('gulp-load-plugins')({
 });
 var port = process.env.PORT || config.defaultPort;
 
-gulp.task('default', ['vet']);
+gulp.task('default', ['help']);
 
-gulp.task('tests', function() {
-  log('Runnings tests');
-  return gulp.src([config.tests]).pipe($.mocha());
-});
+gulp.task('help', $.taskListing);
 
 gulp.task('vet', function() {
   log('Analyzing client-side source code with JSHint and JSCS');
@@ -27,6 +24,13 @@ gulp.task('vet', function() {
     .pipe($.jshint.reporter('fail'));
 });
 
+
+gulp.task('test', function() {
+  log('Running tests');
+  return gulp.src(config.tests)
+    .pipe($.mocha());
+});
+
 gulp.task('build', function() {
   return gulp.src([config.clientjs])
     .pipe($.sourcemaps.init())
@@ -34,6 +38,16 @@ gulp.task('build', function() {
     .pipe($.uglify())
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('images', ['clean-images'], function() {
+  log('Copying and compressing images');
+
+  return gulp.src(config.images)
+    .pipe($.imagemin({
+      optimizationLevel: 4
+    }))
+    .pipe(gulp.dest(config.build + 'images'));
 });
 
 gulp.task('sass', ['clean-css'], function() {
@@ -51,9 +65,18 @@ gulp.task('sass-watch', function() {
   return gulp.watch(config.sass, ['sass']);
 });
 
+gulp.task('clean', function() {
+  var delconfig = [].concat(config.build, config.temp);
+  log('Cleaning: ' + $.util.colors.blue(delconfig));
+  del(delconfig);
+});
+
 gulp.task('clean-css', function() {
-  var files = config.temp + '**/*.css';
-  clean(files);
+  clean(config.temp + '**/*.css');
+});
+
+gulp.task('clean-images', function() {
+  clean(config.build + 'images/**/*.*');
 });
 
 gulp.task('wiredep', function() {
@@ -95,7 +118,13 @@ gulp.task('serve-dev', ['inject'], function() {
     })
     .on('restart', function(ev) {
       log('*** nodemon restarted ***');
-      log('files changed on restart:\n' + ev);
+      log('Files changed on restart:\n' + ev);
+      setTimeout(function() {
+        browserSync.notify('Reloading...');
+        browserSync.reload({
+          stream: false
+        });
+      }, config.browserReloadDelay);
     })
     .on('exit', function() {
       log('*** nodemon crashed: monkeys have been dispatched to clean up your mess ***');
@@ -112,7 +141,7 @@ function startBrowserSync(isDev) {
 
   log('Starting browser-sync on port: ' + port);
 
-  /*if (isDev) {
+  if (isDev) {
     gulp.watch([config.sass], ['sass'])
       .on('change', function(event) {
         changeEvent(event);
@@ -122,14 +151,14 @@ function startBrowserSync(isDev) {
       .on('change', function(event) {
         changeEvent(event);
       });
-  }*/
+  }
 
   var options = {
     proxy: 'localhost:' + port,
     port: 3000,
     files: isDev ? [
       config.client + '**/*.*',
-      '!' + config.less,
+      '!' + config.sass,
       config.temp + '**/*.css'
     ] : [],
     ghostMode: {
@@ -143,10 +172,15 @@ function startBrowserSync(isDev) {
     logLevel: 'debug',
     logPrefix: 'gulp-patterns',
     notify: true,
-    reloadDelay: 1000
+    reloadDelay: 100
   };
 
   browserSync(options);
+}
+
+function changeEvent(event) {
+  var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
+  log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
 }
 
 function log(msg) {

@@ -13,6 +13,6 @@ angular.module('flapperNews.home', ['ui.router']).config([
             }]
           }
         });
-    $urlRouterProvider.otherwise("home");
+    $urlRouterProvider.otherwise('home');
   }
 ]);

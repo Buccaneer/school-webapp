@@ -55,7 +55,7 @@ switch (environment) {
     app.set('views', path.join(__dirname, '../client'));
     app.use(express.static('./src/client/'));
     app.use(express.static('./'));
-    //app.use(express.static('./tmp'));
+    app.use(express.static('./tmp'));
     app.use('/*', express.static('./src/client/index.ejs'));
     break;
 }

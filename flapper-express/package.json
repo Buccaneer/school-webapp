@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./src/server/bin/www"
+    "start": "gulp serve-dev"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -27,6 +27,7 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^2.4.0",
     "gulp-inject": "^3.0.0",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
