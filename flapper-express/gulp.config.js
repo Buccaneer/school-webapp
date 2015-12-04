@@ -26,6 +26,7 @@ module.exports = function() {
      *  Build directories
      */
     build: build,
+    sourcemaps: './maps',
 
     /**
      *  Bower and NPM directories

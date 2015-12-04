@@ -24,10 +24,16 @@ gulp.task('vet', function() {
     .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('optimize', ['inject'], function() {
+gulp.task('optimize', ['inject', 'images', 'clean-maps'], function() {
   log('Optimizing the javascript, css & html.');
 
   var templateCache = config.temp + config.templateCache.file;
+  var cssFilter = $.filter('**/*.css', {
+    restore: true
+  });
+  var jsFilter = $.filter(['**/*.js'], {
+    restore: true
+  });
 
   return gulp.src(config.index)
     .pipe($.plumber())
@@ -39,6 +45,14 @@ gulp.task('optimize', ['inject'], function() {
     .pipe($.useref({
       searchPath: './'
     }))
+    .pipe($.sourcemaps.init())
+    .pipe(cssFilter)
+    .pipe($.csso())
+    .pipe(cssFilter.restore)
+    .pipe(jsFilter)
+    .pipe($.uglify())
+    .pipe(jsFilter.restore)
+    .pipe($.sourcemaps.write(config.sourcemaps))
     .pipe(gulp.dest(config.build));
 });
 
@@ -105,6 +119,10 @@ gulp.task('clean-code', function() {
   clean(files);
 });
 
+gulp.task('clean-maps', function() {
+  clean(config.build + 'maps/**/*.*');
+});
+
 gulp.task('templatecache', ['clean-code'], function() {
   log('Creating AngularJS $templateCache');
 
@@ -131,7 +149,7 @@ gulp.task('wiredep', function() {
     .pipe(gulp.dest(config.client));
 });
 
-gulp.task('inject', ['wiredep', 'sass'], function() {
+gulp.task('inject', ['wiredep', 'sass', 'templatecache'], function() {
   log('Wiring up own css into html and calling wiredep');
   return gulp
     .src(config.index)
