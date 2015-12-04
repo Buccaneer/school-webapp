@@ -2,32 +2,18 @@
 
 <head>
   <title>Flapper News</title>
-  <!--script src="/src/client/vendors/angular.min.js"></script>
-  <script src="/src/client/vendors/angular-ui-router.js"></script>
-  <script src="/src/client/vendors/angular-animate.min.js"></script>
-  <script src="/src/client/app/app.js"></script>
-  <script src="/src/client/app/authentication/auth.config.js"></script>
-  <script src="/src/client/app/authentication/auth.controller.js"></script>
-  <script src="/src/client/app/authentication/auth.factory.js"></script>
-  <script src="/src/client/app/home/home.config.js"></script>
-  <script src="/src/client/app/home/home.controller.js"></script>
-  <script src="/src/client/app/layout/nav.controller.js"></script>
-  <script src="/src/client/app/posts/posts.config.js"></script>
-  <script src="/src/client/app/posts/posts.controller.js"></script>
-  <script src="/src/client/app/posts/posts.factory.js"></script>
-  <script src="/src/client/app/slider/slider.config.js"></script>
-  <script src="/src/client/app/slider/slider.controller.js"></script>
-  <script src="/src/client/app/slider/slider.directive.js"></script>
-  <link rel="stylesheet" href="/src/client/vendors/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/src/client/stylesheets/style.css" /-->
 
+  <!-- build:css styles/lib.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
   <!-- endbower -->
+  <!-- endbuild -->
 
+  <!-- build:css styles/app.css -->
   <!-- inject:css -->
   <link rel="stylesheet" href="/.tmp/styles.css">
   <!-- endinject -->
+  <!-- endbuild -->
 
 </head>
 
@@ -50,13 +36,16 @@
     </div>
   </div>
 
+  <!-- build:js js/lib.js -->
   <!-- bower:js -->
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/bower_components/angular-animate/angular-animate.js"></script>
   <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <!-- endbower -->
+  <!-- endbuild -->
 
+  <!-- build:js js/app.js -->
   <!-- inject:js -->
   <script src="/src/client/app/app.js"></script>
   <script src="/src/client/app/authentication/auth.config.js"></script>
@@ -72,6 +61,10 @@
   <script src="/src/client/app/slider/slider.controller.js"></script>
   <script src="/src/client/app/slider/slider.directive.js"></script>
   <!-- endinject -->
+
+  <!-- inject:templates:js -->
+  <!-- endinject -->
+  <!-- endbuild -->
 </body>
 
 </html>

@@ -15,11 +15,12 @@ module.exports = function() {
      *   Client directories
      */
     client: client,
-    clientjs: [client + '**/*.js', client + '**/*.module.js'],
+    clientjs: [client + '**/*.js', client + '**/*.module.js', client + '**/*.config.js'],
     index: client + 'index.ejs',
     sass: client + 'stylesheets/*.scss',
     images: client + 'img/**/*.*',
     htmltemplates: client + 'app/**/*.html',
+    html: client + 'app/**/*.html',
 
     /**
      *  Build directories
@@ -38,7 +39,7 @@ module.exports = function() {
     /**
      *  Server directories and settings
      */
-    defaultPort: 3000,
+    defaultPort: 8000,
     nodeServer: server + 'app.js',
     server: server,
 
@@ -48,8 +49,8 @@ module.exports = function() {
     templateCache: {
       file: 'templates.js',
       options: {
-        module: 'app.core',
-        standAlone: false,
+        module: 'flapperNews.templates',
+        standalone: true,
         root: 'app/'
       }
     },
