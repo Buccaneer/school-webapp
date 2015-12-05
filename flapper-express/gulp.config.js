@@ -27,6 +27,10 @@ module.exports = function() {
      */
     build: build,
     sourcemaps: './maps',
+    optimized: {
+      app: 'app.js'
+      lib: 'lib.js'
+    },
 
     /**
      *  Bower and NPM directories

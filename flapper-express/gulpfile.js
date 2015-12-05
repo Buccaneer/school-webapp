@@ -31,7 +31,10 @@ gulp.task('optimize', ['inject', 'images', 'clean-maps'], function() {
   var cssFilter = $.filter('**/*.css', {
     restore: true
   });
-  var jsFilter = $.filter(['**/*.js'], {
+  var jsLibFilter = $.filter(['**/' + config.optimized.lib], {
+    restore: true
+  });
+  var jsAppFilter = $.filter(['**/' + config.optimized.app], {
     restore: true
   });
 
@@ -45,14 +48,18 @@ gulp.task('optimize', ['inject', 'images', 'clean-maps'], function() {
     .pipe($.useref({
       searchPath: './'
     }))
-    .pipe($.sourcemaps.init())
+    .pipe($.sourcemaps.init()) //start mapping sources
     .pipe(cssFilter)
-    .pipe($.csso())
+    .pipe($.csso()) //minify css
     .pipe(cssFilter.restore)
-    .pipe(jsFilter)
-    .pipe($.uglify())
-    .pipe(jsFilter.restore)
-    .pipe($.sourcemaps.write(config.sourcemaps))
+    .pipe(jsLibFilter)
+    .pipe($.uglify()) //minify vendor js
+    .pipe(jsLibFilter.restore)
+    .pipe(jsAppFilter)
+    .pipe($.ngAnnotate()) //protect ng app di
+    .pipe($.uglify()) //minify app
+    .pipe(jsAppFilter.restore)
+    .pipe($.sourcemaps.write(config.sourcemaps)) //write source maps
     .pipe(gulp.dest(config.build));
 });
 
