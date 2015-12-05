@@ -18,7 +18,7 @@
 </head>
 
 <body ng-app="flapperNews" ng-controller="HomeCtrl" class="container-fluid">
-  <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+  <nav class="navbar navbar-default navbar-fixed-top navbar-custom" ng-controller="NavCtrl">
     <ul class="nav navbar-nav">
       <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
       <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div ng-controller="SliderController">
-        <h1>Slider Using AngularJS</h1>
+        <h1 class="page-header">Pictures</h1>
         <slider images="images" />
       </div>
       <div ui-view></div>

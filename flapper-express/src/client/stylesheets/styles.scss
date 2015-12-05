@@ -1,6 +1,7 @@
-$font-stack:    Helvetica, sans-serif;
+$font-stack: Helvetica, sans-serif;
 $color-primary: #333;
 $color-secondary: #600;
+$color-ternary: #900;
 
 body {
   color: $color-primary;
@@ -9,5 +10,18 @@ body {
 }
 
 a {
+  color: $color-ternary;
+}
+
+.page-header {
+  color: $color-secondary;
+}
+
+.navbar-custom {
+  background-color: transparentize($color-ternary, .7);
+  border-style: none;
+}
+
+.navbar-default .navbar-nav > li > a {
   color: $color-secondary;
 }
