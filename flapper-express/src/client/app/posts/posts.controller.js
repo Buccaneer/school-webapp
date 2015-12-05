@@ -1,30 +1,31 @@
-angular.module('flapperNews.posts').controller('PostsCtrl', [
-  '$scope',
-  'posts',
-  'post',
-  function($scope, posts /*$stateParams*/ , /*posts*/ post) {
-    $scope.post = post;
-    //$scope.post = posts.posts[$stateParams.id];
-    $scope.addComment = function() {
-      if ($scope.body === '') {
-        return;
-      }
-      posts.addComment(post._id, {
-        body: $scope.body,
-        author: 'user',
-      }).success(function(comment) {
-        $scope.post.comments.push(comment);
-      });
-      $scope.body = '';
-    };
+angular
+  .module('flapperNews.posts')
+  .controller('PostsCtrl', ['$scope', 'posts', 'post', PostsCtrl]);
 
-    $scope.incrementCommentUpvotes = function(comment) {
-      posts.upvoteComment(post, comment);
-    };
+function PostsCtrl($scope, posts, post) {
+  $scope.post = post;
+  $scope.addComment = addComment;
+  $scope.incrementCommentUpvotes = incrementCommentUpvotes;
+  $scope.decrementCommentUpvotes = decrementCommentUpvotes;
 
-    $scope.decrementCommentUpvotes = function(comment) {
-      posts.downvoteComment(post, comment);
-    };
-
+  function addComment() {
+    if ($scope.body === '') {
+      return;
+    }
+    posts.addComment(post._id, {
+      body: $scope.body,
+      author: 'user',
+    }).success(function(comment) {
+      $scope.post.comments.push(comment);
+    });
+    $scope.body = '';
   }
-]);
+
+  function incrementCommentUpvotes(comment) {
+    posts.upvoteComment(post, comment);
+  }
+
+  function decrementCommentUpvotes(comment) {
+    posts.downvoteComment(post, comment);
+  }
+}

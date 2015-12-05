@@ -1,4 +1,8 @@
-angular.module('flapperNews.slider').controller('SliderController', function($scope) {
+angular
+  .module('flapperNews.slider')
+  .controller('SliderController', SliderController);
+
+function SliderController($scope) {
   $scope.images = [{
     src: 'img1.png',
     title: 'Pic 1'
@@ -15,4 +19,4 @@ angular.module('flapperNews.slider').controller('SliderController', function($sc
     src: 'img5.png',
     title: 'Pic 5'
   }];
-});
+}
