@@ -28,7 +28,7 @@ module.exports = function() {
     build: build,
     sourcemaps: './maps',
     optimized: {
-      app: 'app.js'
+      app: 'app.js',
       lib: 'lib.js'
     },
 
